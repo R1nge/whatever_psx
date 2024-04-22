@@ -22,5 +22,10 @@ namespace _Assets.Scripts.Services.UIs.Views
                 _characterSelectionController.SelectNextCharacter();
             }
         }
+
+        public void Animate()
+        {
+            
+        }
     }
 }

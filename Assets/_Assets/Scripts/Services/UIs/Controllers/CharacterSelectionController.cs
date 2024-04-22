@@ -11,7 +11,10 @@ namespace _Assets.Scripts.Services.UIs.Controllers
         private readonly ConfigProvider _configProvider;
         private readonly CharacterSkinFactory _characterSkinFactory;
 
-        private CharacterSelectionController(CharacterSelectionService characterSelectionService, ConfigProvider configProvider, CharacterSkinFactory characterSkinFactory)
+        private GameObject[] _characters;
+
+        private CharacterSelectionController(CharacterSelectionService characterSelectionService,
+            ConfigProvider configProvider, CharacterSkinFactory characterSkinFactory)
         {
             _characterSelectionService = characterSelectionService;
             _configProvider = configProvider;
@@ -20,6 +23,8 @@ namespace _Assets.Scripts.Services.UIs.Controllers
 
         public void Init(Vector3 origin)
         {
+            _characters = new GameObject[_configProvider.Characters.Length];
+
             for (int i = 0; i < _configProvider.Characters.Length; i++)
             {
                 var character = _characterSkinFactory.Create(i);
@@ -28,17 +33,30 @@ namespace _Assets.Scripts.Services.UIs.Controllers
                 var angle = angleIncrement * i;
                 character.transform.RotateAround(origin, Vector3.up, angle);
                 character.transform.LookAt(origin, Vector3.up);
+                _characters[i] = character;
             }
         }
 
         public void SelectNextCharacter()
         {
+            var previous = _characterSelectionService.SelectedCharacterIndex;
             _characterSelectionService.SelectNextCharacter();
+            SelectCharacter(previous);
         }
 
         public void SelectPreviousCharacter()
         {
+            var previous = _characterSelectionService.SelectedCharacterIndex;
             _characterSelectionService.SelectPreviousCharacter();
+            SelectCharacter(previous);
+        }
+
+        private void SelectCharacter(int previous)
+        {
+            var current = _characterSelectionService.SelectedCharacterIndex;
+
+            _characters[previous].SetActive(false);
+            _characters[current].SetActive(true);
         }
     }
 }
