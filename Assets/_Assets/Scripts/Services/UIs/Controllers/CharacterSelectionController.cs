@@ -1,6 +1,7 @@
 ﻿using _Assets.Scripts.Configs;
 using _Assets.Scripts.Services.CharacterSelection;
 using _Assets.Scripts.Services.Factories;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Assets.Scripts.Services.UIs.Controllers
@@ -34,11 +35,6 @@ namespace _Assets.Scripts.Services.UIs.Controllers
                 character.transform.RotateAround(origin, Vector3.up, angle);
                 character.transform.LookAt(origin, Vector3.up);
                 _characters[i] = character;
-
-                if (i != 0)
-                {
-                    _characters[i].SetActive(false);
-                }
             }
         }
 
@@ -60,8 +56,11 @@ namespace _Assets.Scripts.Services.UIs.Controllers
         {
             var current = _characterSelectionService.SelectedCharacterIndex;
 
-            _characters[previous].SetActive(false);
-            _characters[current].SetActive(true);
+            var previousCharacterPosition = _characters[previous].transform.position;
+            var currentCharacterPosition = _characters[current].transform.position;
+            const float duration = .25f;
+            _characters[previous].transform.DOMove(currentCharacterPosition, duration);
+            _characters[current].transform.DOMove(previousCharacterPosition, duration);
         }
     }
 }
