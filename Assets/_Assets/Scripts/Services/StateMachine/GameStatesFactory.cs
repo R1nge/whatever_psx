@@ -19,8 +19,8 @@ namespace _Assets.Scripts.Services.StateMachine
             {
                 case GameStateType.Init:
                     return new InitState(gameStateMachine, _uiStateMachine);
-                case GameStateType.Game:
-                    return new GameState(gameStateMachine);
+                case GameStateType.CharacterSelection:
+                    return new CharacterSelectionState(gameStateMachine, _uiStateMachine);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(gameStateType), gameStateType, null);
             }

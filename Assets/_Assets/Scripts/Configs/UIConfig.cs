@@ -6,8 +6,10 @@ namespace _Assets.Scripts.Configs
     public class UIConfig : ScriptableObject
     {
         [SerializeField] private GameObject loadingUI;
+        [SerializeField] private GameObject characterSelectionUI;
         [SerializeField] private GameObject gameUI;
         public GameObject LoadingUI => loadingUI;
+        public GameObject CharacterSelectionUI => characterSelectionUI;
         public GameObject GameUI => gameUI;
     }
 }

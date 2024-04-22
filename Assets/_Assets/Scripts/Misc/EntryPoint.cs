@@ -9,6 +9,6 @@ namespace _Assets.Scripts.Misc
     {
         [Inject] private GameStateMachine _gameStateMachine;
 
-        private void Start() => _gameStateMachine.SwitchState(GameStateType.Init).Forget();
+        private void Start() => _gameStateMachine.SwitchState(GameStateType.CharacterSelection).Forget();
     }
 }

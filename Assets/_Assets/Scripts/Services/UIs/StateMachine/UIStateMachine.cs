@@ -9,7 +9,7 @@ namespace _Assets.Scripts.Services.UIs.StateMachine
             States = new Dictionary<UIStateType, IAsyncState>
             {
                 { UIStateType.Loading, uiStatesFactory.CreateState(UIStateType.Loading, this) },
-                { UIStateType.Game, uiStatesFactory.CreateState(UIStateType.Game, this) }
+                { UIStateType.CharacterSelection, uiStatesFactory.CreateState(UIStateType.CharacterSelection, this) }
             };
         }
     }

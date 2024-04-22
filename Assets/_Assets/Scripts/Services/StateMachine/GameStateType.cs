@@ -4,6 +4,7 @@
     {
         None = 0,
         Init = 1,
-        Game = 2
+        CharacterSelection = 2,
+        Game = 3
     }
 }
