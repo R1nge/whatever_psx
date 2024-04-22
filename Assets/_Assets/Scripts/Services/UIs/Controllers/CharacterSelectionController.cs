@@ -42,19 +42,17 @@ namespace _Assets.Scripts.Services.UIs.Controllers
 
         public async UniTask SelectNextCharacter()
         {
-            var previous = _characterSelectionService.SelectedCharacterIndex;
             _characterSelectionService.SelectNextCharacter();
-            await SelectCharacter(previous, true);
+            await SelectCharacter(true);
         }
 
         public async UniTask SelectPreviousCharacter()
         {
-            var previous = _characterSelectionService.SelectedCharacterIndex;
             _characterSelectionService.SelectPreviousCharacter();
-            await SelectCharacter(previous, false);
+            await SelectCharacter(false);
         }
 
-        private async UniTask SelectCharacter(int previous, bool right)
+        private async UniTask SelectCharacter(bool right)
         {
             if (!_canSelect)
             {
