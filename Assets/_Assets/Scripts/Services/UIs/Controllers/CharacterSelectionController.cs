@@ -1,6 +1,7 @@
 ﻿using _Assets.Scripts.Configs;
 using _Assets.Scripts.Services.CharacterSelection;
 using _Assets.Scripts.Services.Factories;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace _Assets.Scripts.Services.UIs.Controllers
         private readonly CharacterSkinFactory _characterSkinFactory;
 
         private GameObject[] _characters;
+        private bool _canSelect = true;
 
         private CharacterSelectionController(CharacterSelectionService characterSelectionService,
             ConfigProvider configProvider, CharacterSkinFactory characterSkinFactory)
@@ -38,22 +40,28 @@ namespace _Assets.Scripts.Services.UIs.Controllers
             }
         }
 
-        public void SelectNextCharacter()
+        public async UniTask SelectNextCharacter()
         {
             var previous = _characterSelectionService.SelectedCharacterIndex;
             _characterSelectionService.SelectNextCharacter();
-            SelectCharacter(previous);
+            await SelectCharacter(previous);
         }
 
-        public void SelectPreviousCharacter()
+        public async UniTask SelectPreviousCharacter()
         {
             var previous = _characterSelectionService.SelectedCharacterIndex;
             _characterSelectionService.SelectPreviousCharacter();
-            SelectCharacter(previous);
+            await SelectCharacter(previous);
         }
 
-        private void SelectCharacter(int previous)
+        private async UniTask SelectCharacter(int previous)
         {
+            if (!_canSelect)
+            {
+                return;
+            }
+
+            _canSelect = false;
             var current = _characterSelectionService.SelectedCharacterIndex;
 
             var previousCharacterPosition = _characters[previous].transform.position;
@@ -61,6 +69,8 @@ namespace _Assets.Scripts.Services.UIs.Controllers
             const float duration = .25f;
             _characters[previous].transform.DOMove(currentCharacterPosition, duration);
             _characters[current].transform.DOMove(previousCharacterPosition, duration);
+            await UniTask.Delay((int)(duration * 1000f));
+            _canSelect = true;
         }
     }
 }
