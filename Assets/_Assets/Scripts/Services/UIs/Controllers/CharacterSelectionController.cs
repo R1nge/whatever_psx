@@ -35,7 +35,7 @@ namespace _Assets.Scripts.Services.UIs.Controllers
                 var angleIncrement = 360f / _configProvider.Characters.Length;
                 var angle = angleIncrement * i;
                 character.transform.RotateAround(origin, Vector3.up, angle);
-                character.transform.LookAt(origin, Vector3.up);
+                character.transform.rotation = Quaternion.Euler(new Vector3(0, -180f, 0));
                 _characters[i] = character;
             }
         }
@@ -44,17 +44,17 @@ namespace _Assets.Scripts.Services.UIs.Controllers
         {
             var previous = _characterSelectionService.SelectedCharacterIndex;
             _characterSelectionService.SelectNextCharacter();
-            await SelectCharacter(previous);
+            await SelectCharacter(previous, true);
         }
 
         public async UniTask SelectPreviousCharacter()
         {
             var previous = _characterSelectionService.SelectedCharacterIndex;
             _characterSelectionService.SelectPreviousCharacter();
-            await SelectCharacter(previous);
+            await SelectCharacter(previous, false);
         }
 
-        private async UniTask SelectCharacter(int previous)
+        private async UniTask SelectCharacter(int previous, bool right)
         {
             if (!_canSelect)
             {
@@ -62,13 +62,35 @@ namespace _Assets.Scripts.Services.UIs.Controllers
             }
 
             _canSelect = false;
-            var current = _characterSelectionService.SelectedCharacterIndex;
-
-            var previousCharacterPosition = _characters[previous].transform.position;
-            var currentCharacterPosition = _characters[current].transform.position;
             const float duration = .25f;
-            _characters[previous].transform.DOMove(currentCharacterPosition, duration);
-            _characters[current].transform.DOMove(previousCharacterPosition, duration);
+
+            if (right)
+            {
+                var lastCharacterPosition = _characters[^1].transform.position;
+
+                // Move each character to the position of the next character (to the right)
+                for (int i = _characters.Length - 1; i > 0; i--)
+                {
+                    _characters[i].transform.DOMove(_characters[i - 1].transform.position, duration);
+                }
+
+                // Move the last character to the first position
+                _characters[0].transform.DOMove(lastCharacterPosition, duration);
+            }
+            else
+            {
+                var firstCharacterPosition = _characters[0].transform.position;
+
+                // Move each character to the position of the previous character (to the left)
+                for (int i = 0; i < _characters.Length - 1; i++)
+                {
+                    _characters[i].transform.DOMove(_characters[i + 1].transform.position, duration);
+                }
+
+                // Move the first character to the last position
+                _characters[^1].transform.DOMove(firstCharacterPosition, duration);
+            }
+
             await UniTask.Delay((int)(duration * 1000f));
             _canSelect = true;
         }
