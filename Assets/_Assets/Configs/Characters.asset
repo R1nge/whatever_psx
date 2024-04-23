@@ -15,9 +15,5 @@ MonoBehaviour:
   characters:
   - skin: {fileID: 4399749502169736535, guid: eef85004fdb2dc44a8d04f0a57b8f006, type: 3}
     character: {fileID: 4718724354106741398, guid: 20925073f48d00b42b7b24f3c3a7606d, type: 3}
-  - skin: {fileID: 4399749502169736535, guid: eef85004fdb2dc44a8d04f0a57b8f006, type: 3}
-    character: {fileID: 4718724354106741398, guid: 20925073f48d00b42b7b24f3c3a7606d, type: 3}
-  - skin: {fileID: 4399749502169736535, guid: eef85004fdb2dc44a8d04f0a57b8f006, type: 3}
-    character: {fileID: 4718724354106741398, guid: 20925073f48d00b42b7b24f3c3a7606d, type: 3}
-  - skin: {fileID: 4399749502169736535, guid: eef85004fdb2dc44a8d04f0a57b8f006, type: 3}
-    character: {fileID: 4718724354106741398, guid: 20925073f48d00b42b7b24f3c3a7606d, type: 3}
+  - skin: {fileID: 6556465617295499603, guid: ae1a20b88d0dced498bc2f6a96104a78, type: 3}
+    character: {fileID: 8999955273671697740, guid: ae446e7f7d7193a4a8fdd6fa93df791d, type: 3}

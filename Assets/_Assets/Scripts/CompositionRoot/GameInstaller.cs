@@ -1,3 +1,4 @@
+using _Assets.Scripts.Services;
 using _Assets.Scripts.Services.CharacterSelection;
 using _Assets.Scripts.Services.Factories;
 using _Assets.Scripts.Services.StateMachine;
@@ -13,6 +14,9 @@ namespace _Assets.Scripts.CompositionRoot
     {
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<InputService>(Lifetime.Singleton);
+            
+            
             //TODO: move to character selection installer or something
             builder.Register<CharacterSelectionService>(Lifetime.Singleton);
             builder.Register<CharacterSelectionController>(Lifetime.Singleton);

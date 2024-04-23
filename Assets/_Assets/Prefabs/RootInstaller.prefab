@@ -64,3 +64,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiConfig: {fileID: 11400000, guid: c01c0ec4a5855f641b051cf97763b193, type: 2}
   characters: {fileID: 11400000, guid: 57db375e4b4cfd04bb45d81a76487ccd, type: 2}
+  input: {fileID: -944628639613478452, guid: a1d450483b0b0014d9a7aaf69a12676a, type: 3}
