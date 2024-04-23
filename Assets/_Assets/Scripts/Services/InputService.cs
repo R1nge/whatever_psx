@@ -19,6 +19,8 @@ namespace _Assets.Scripts.Services
         
         public float LookHorizontal => _configProvider.Input.FindAction("Look").ReadValue<Vector2>().x;
         public float LookVertical => _configProvider.Input.FindAction("Look").ReadValue<Vector2>().y;
+        
+        public bool Jump => _configProvider.Input.FindActionMap("Player").FindAction("Jump").WasPressedThisFrame();
 
         public void Enable() => _enabled = true;
         

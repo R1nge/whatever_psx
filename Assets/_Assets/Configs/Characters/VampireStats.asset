@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   maxHealth: 25
+  jumps: 1
+  jumpForce: 1000
+  gravity: 9.8

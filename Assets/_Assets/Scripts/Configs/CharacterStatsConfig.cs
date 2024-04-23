@@ -9,10 +9,12 @@ namespace _Assets.Scripts.Configs
         [SerializeField] private int maxHealth;
         [SerializeField] private int jumps;
         [SerializeField] private float jumpForce;
+        [SerializeField] private float gravity;
 
         public float Speed => speed;
         public int MaxHealth => maxHealth;
         public int Jumps => jumps;
         public float JumpForce => jumpForce;
+        public float Gravity => gravity;
     }
 }
