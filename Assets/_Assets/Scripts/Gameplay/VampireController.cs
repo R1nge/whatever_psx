@@ -9,13 +9,14 @@ namespace _Assets.Scripts.Gameplay
     {
         [SerializeField] private float lookLimit = 90f;
         [SerializeField] private CinemachineVirtualCamera playerCamera;
+        [SerializeField] private CharacterController characterController;
         private PlayerMovementController _playerMovementController;
         private PlayerCameraController _playerCameraController;
         [Inject] private InputService _inputService;
 
         private void Start()
         {
-            _playerMovementController = new PlayerMovementController(transform);
+            _playerMovementController = new PlayerMovementController(transform, characterController);
             _playerCameraController = new PlayerCameraController(transform, playerCamera.transform);
         }
 
