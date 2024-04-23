@@ -13,12 +13,12 @@ namespace _Assets.Scripts.Gameplay
             _characterController = characterController;
         }
         
-        public void Move(Vector3 input)
+        public void Move(Vector3 input, float speed)
         {
             var forward = _transform.TransformDirection(Vector3.forward);
             var right = _transform.TransformDirection(Vector3.right);
             var direction = forward * input.z + right * input.x;
-            _characterController.Move(direction * Time.deltaTime);
+            _characterController.Move(direction * (Time.deltaTime * speed));
         }
     }
 }

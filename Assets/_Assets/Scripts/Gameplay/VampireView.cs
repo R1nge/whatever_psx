@@ -1,12 +1,14 @@
-﻿using _Assets.Scripts.Services;
+﻿using _Assets.Scripts.Configs;
+using _Assets.Scripts.Services;
 using Cinemachine;
 using UnityEngine;
 using VContainer;
 
 namespace _Assets.Scripts.Gameplay
 {
-    public class VampireController : MonoBehaviour
+    public class VampireView : MonoBehaviour
     {
+        [SerializeField] private CharacterStatsConfig stats;
         [SerializeField] private float lookLimit = 90f;
         [SerializeField] private CinemachineVirtualCamera playerCamera;
         [SerializeField] private CharacterController characterController;
@@ -22,9 +24,8 @@ namespace _Assets.Scripts.Gameplay
 
         private void Update()
         {
-            Debug.Log(_inputService.MoveHorizontal + " " + _inputService.MoveVertical);
             _playerCameraController.Look(_inputService.LookHorizontal, _inputService.LookVertical, 0.2f, lookLimit);
-            _playerMovementController.Move(new Vector3(_inputService.MoveHorizontal, 0, _inputService.MoveVertical));
+            _playerMovementController.Move(new Vector3(_inputService.MoveHorizontal, 0, _inputService.MoveVertical), stats.Speed);
         }
     }
 }

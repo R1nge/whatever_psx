@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4984732157c40279597485407eba56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 20602a26974d4d34eb7f8895fafe0997, type: 2}
   lookLimit: 90
   playerCamera: {fileID: 3996513966809385956}
   characterController: {fileID: 2901721555933830658}
